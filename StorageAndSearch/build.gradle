@@ -27,6 +27,8 @@ dependencies {
 	compile 'org.springframework:spring-context:4.3.0.RELEASE'
     compile 'org.springframework.webflow:spring-webflow:2.4.2.RELEASE'
     compile 'org.hibernate:hibernate-core:5.2.0.Final'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.13'
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
 
     // Declare the dependency for your favourite test framework you want to use in your tests.
     // TestNG is also supported by the Gradle Test task. Just change the

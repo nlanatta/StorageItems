@@ -8,6 +8,8 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import com.nlan.appSpring.config.WebappConfig;
+
 public class Initializer implements WebApplicationInitializer {
 
 	@Override
@@ -22,8 +24,6 @@ public class Initializer implements WebApplicationInitializer {
 	    Dynamic servlet =
 	        servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
 	    servlet.addMapping("/");
-	    servlet.setLoadOnStartup(1);
-		
+	    servlet.setLoadOnStartup(1);		
 	}
-
 }

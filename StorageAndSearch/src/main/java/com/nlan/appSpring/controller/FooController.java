@@ -1,7 +1,10 @@
-package com.nlan.appSpring;
+package com.nlan.appSpring.controller;
 
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,13 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@ComponentScan("com.nlan.appSpring.controller")
 public class FooController {
 
+	@PostConstruct
+	public void init() {
+		System.out.println("SE CREO");
+	}
+	
 	@RequestMapping("/hello")
 	public String helloWorld(Model model) {
 		// let’s pass some variables to the view script
 		model.addAttribute("wisdom", "Goodbye XML");
-		Boolean hasit = model.containsAttribute("var");
 		return "hello"; // renders /WEB-INF/views/hello.jsp
 	}
 
