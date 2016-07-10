@@ -12,20 +12,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.nlan.appSpring.model.Item;
+
 @Controller
 @ComponentScan("com.nlan.appSpring.controller")
 public class FooController {
 
 	@PostConstruct
 	public void init() {
-		System.out.println("SE CREO");
+		System.out.println("FooController::Initialized");
 	}
 	
-	@RequestMapping("/hello")
+	@RequestMapping("/admin")
 	public String helloWorld(Model model) {
-		// let’s pass some variables to the view script
-		model.addAttribute("wisdom", "Goodbye XML");
-		return "hello"; // renders /WEB-INF/views/hello.jsp
+		Item newItem = new Item();
+		model.addAttribute("admin", newItem );
+		return "admin";
 	}
 
 	// @RequestMapping(value = "/params", method = RequestMethod.GET)
@@ -56,23 +58,23 @@ public class FooController {
 //		return "params"; // renders /WEB-INF/views/hello.jsp
 //	}
 	
-	@RequestMapping(value = "/params", method = RequestMethod.GET)
-	public ModelAndView paramsRequested(Model model, @RequestParam Map<String, String> params) {
-		// let’s pass some variables to the view script
-		String username = params.get("username");
-		String password = params.get("password");
-		
-		
-		if(params.get("redirect").equals("true"))
-		{
-			return new ModelAndView("redirect:/hello");
-		}
-		
-		
-		model.addAttribute("username", username);		
-		model.addAttribute("password", password);		
-		ModelAndView modelView = new ModelAndView("params");
-	    modelView.addObject("model", model);
-		return modelView;
-	}
+//	@RequestMapping(value = "/params", method = RequestMethod.GET)
+//	public ModelAndView paramsRequested(Model model, @RequestParam Map<String, String> params) {
+//		// let’s pass some variables to the view script
+//		String username = params.get("username");
+//		String password = params.get("password");
+//		
+//		
+//		if(params.get("redirect").equals("true"))
+//		{
+//			return new ModelAndView("redirect:/hello");
+//		}
+//		
+//		
+//		model.addAttribute("username", username);		
+//		model.addAttribute("password", password);		
+//		ModelAndView modelView = new ModelAndView("params");
+//	    modelView.addObject("model", model);
+//		return modelView;
+//	}
 }
