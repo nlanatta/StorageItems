@@ -15,15 +15,9 @@
 <script src="${appJs}"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<title>Insert title here</title>
+<title>Edit Item</title>
 </head>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Storage Items</a>
-		</div>
-	</div>
-</nav>
+<jsp:include page="header.jsp" />
 
 <div class="jumbotron">
 	<div class="container">
@@ -43,21 +37,26 @@
 
 <div id="form" class="container" ${aditionalStylesValues}>
 	<spring:url value="/items" var="itemsActionUrl" />
-
-	<form:form action="${itemsActionUrl}" method="post" modelAttribute="admin">
-			<div class="form-group">
-				<label>Name</label> 
-				<form:input path="name" type="text" class="form-control" id="name" placeholder="${model.item.name}" />
-			</div>
-			<div class="form-group">
-				<label>Description</label>
-				<form:textarea path="description" id="description" class="form-control"  rows="4" cols="50" placeholder="${model.item.description}" />			
-			</div>
-			<div class="form-group">
-				<label>Attach file</label> 
-				<form:input path="image" id="image" type="file" placeholder="${model.item.image}"/>
-				<p class="help-block">Chose an image for the item</p>
-			</div>
+	<spring:url value="/resources/core/images/" var="itemsImageUrl" />
+	
+	<form:form action="${itemsActionUrl}" method="post" modelAttribute="admin" enctype="multipart/form-data">
+		<div class="form-group">
+			<label>Name</label>
+			<form:input path="name" type="text" class="form-control" id="name" placeholder="${model.item.name}" />
+		</div>
+		<div class="form-group">
+			<label>Description</label>
+			<form:textarea path="description" id="description" class="form-control" rows="4" cols="50" 
+				placeholder="${model.item.description}"/>
+		</div>
+		<div class="form-group">
+			<label>Currently image</label>
+			<img class="thumbnail" width="242" height="200" src="${itemsImageUrl}${model.item.image}" alt="${model.item.name}">					
+			<label>Attach file</label>
+			<form:input path="image" id="image" type="file" />
+			<p class="help-block">Chose an image for the item</p>
+		</div>
+		<form:input path="id" type="hidden" value="${model.item.id}" />
 		<button type="submit" class="btn btn-default">Send</button>
 	</form:form>
 

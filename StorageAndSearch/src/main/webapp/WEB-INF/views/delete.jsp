@@ -13,7 +13,7 @@
 <script src="${bootstrapJs}"></script>
 <script src="${appJs}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<title>Insert title here</title>
+<title>Delete Item</title>
 </head>
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">

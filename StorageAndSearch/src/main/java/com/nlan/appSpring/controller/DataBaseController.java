@@ -1,5 +1,6 @@
 package com.nlan.appSpring.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.nlan.appSpring.model.Item;
 import com.nlan.appSpring.services.ItemService;
+import com.nlan.appSpring.utils.FileUpload;
 
 @Controller
 @ComponentScan("com.nlan.appSpring.controller")
@@ -27,14 +29,36 @@ public class DataBaseController {
 
 	@RequestMapping(value = "/items", method = RequestMethod.POST)
 	public ModelAndView addItemRequested(@ModelAttribute("admin") @Validated Item item, BindingResult result,
-			Model model, final RedirectAttributes redirectAttributes) {
+			@RequestParam("image") MultipartFile file, @RequestParam("name") String name,
+			@RequestParam("description") String description, Model model) {
 
-		if (result.hasErrors()) {
-			model.addAttribute("item", item);
-			ModelAndView modelView = new ModelAndView("admin");
-			modelView.addObject("model", model);
-			return modelView;
+		// Save image on resources/core/images
+		try {
+			Item itemToChange = itemService.findById(item.getId());
+			if (!FileUpload.proccesFile(file)) {
+				if (itemToChange != null) {
+					item.setImage(itemToChange.getImage());
+				}
+			}
+			
+			if (item.getImage() == null) {
+				item.setImage(file.getOriginalFilename());
+			}
+			
+			if(item.getDescription().equals(""))
+			{
+				item.setDescription(itemToChange.getDescription());
+			}
+			
+			if(item.getName().equals(""))
+			{
+				item.setName(itemToChange.getName());
+			}
+				
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		
 
 		itemService.saveOrUpdate(item);
 
@@ -48,8 +72,6 @@ public class DataBaseController {
 
 	@RequestMapping(value = "/itemList")
 	public ModelAndView listItemsRequested(Model model) {
-
-		model.addAttribute("admin", new Item());
 
 		List<Item> list = itemService.findAll();
 		model.addAttribute("items", list);
@@ -75,10 +97,9 @@ public class DataBaseController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView editItemRequested(Model model, @RequestParam Integer id) {
 
+		model.addAttribute("admin", new Item());
+
 		Item item = itemService.findById(id);
-		if (item != null) {
-			itemService.saveOrUpdate(item);
-		}
 
 		model.addAttribute("item", item);
 		ModelAndView modelView = new ModelAndView("edit");

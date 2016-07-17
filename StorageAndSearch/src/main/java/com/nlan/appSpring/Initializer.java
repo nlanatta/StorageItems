@@ -1,5 +1,6 @@
 package com.nlan.appSpring;
 
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration.Dynamic;
@@ -19,11 +20,15 @@ public class Initializer implements WebApplicationInitializer {
 	    AnnotationConfigWebApplicationContext ctx =
 	        new AnnotationConfigWebApplicationContext();
 	    ctx.register(WebappConfig.class);
-
+	    ctx.setServletContext(servletContext);
+	    ctx.refresh();
+	    
 	    // Add the servlet mapping manually and make it initialize automatically
 	    Dynamic servlet =
 	        servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
 	    servlet.addMapping("/");
-	    servlet.setLoadOnStartup(1);		
+	    servlet.setLoadOnStartup(1);
+	    //this is to manage multipart images
+	    servlet.setMultipartConfig(ctx.getBean("multipartConfigElement", MultipartConfigElement.class));
 	}
 }

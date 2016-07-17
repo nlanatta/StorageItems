@@ -15,15 +15,9 @@
 <script src="${appJs}"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<title>Insert title here</title>
+<title>Item List</title>
 </head>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Storage Items</a>
-		</div>
-	</div>
-</nav>
+<jsp:include page="header.jsp" />
 
 <div class="jumbotron">
 	<div class="container">

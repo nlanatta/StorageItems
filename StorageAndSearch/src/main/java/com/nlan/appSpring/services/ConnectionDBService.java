@@ -1,8 +1,5 @@
 package com.nlan.appSpring.services;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Properties;
 
 import javax.annotation.Resource;
@@ -27,17 +24,6 @@ public class ConnectionDBService {
 
 	@Resource
 	private DataBaseConfig dbConfig;
-
-	public Connection getConnectionStorageDB() throws SQLException {
-		try {
-			Class.forName(dbConfig.getDriver());
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		Connection connection = DriverManager.getConnection(dbConfig.getUrl(), dbConfig.getUsername(),
-				dbConfig.getPassword());
-		return connection;
-	}
 
 	@Bean(name = "dataSource")
 	private DataSource dataSource() {
@@ -77,7 +63,7 @@ public class ConnectionDBService {
 		properties.put("hibernate.show_sql", dbConfig.getShowSql());
 		properties.put("hibernate.hbm2ddl.auto", dbConfig.getHbm2dllAuto());
 		properties.put("hibernate.pool_size", dbConfig.getPoolSize());
-		//properties.put("hibernate.current_session_context_class", dbConfig.getCurrentSessionContextClass());
+		properties.put("hibernate.generate_statistics", dbConfig.getGenerateStatistics());
 		return properties;
 	}
 

@@ -13,15 +13,9 @@
 <script src="${bootstrapJs}"></script>
 <script src="${appJs}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<title>Delete Item</title>
+<title>Admin Panel Items</title>
 </head>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Storage Items</a>
-		</div>
-	</div>
-</nav>
+<jsp:include page="header.jsp" />
 
 <div class="jumbotron">
 	<div class="container">
@@ -33,14 +27,15 @@
 	</div>
 </div>
 
-<div id="result" class="container" >
-	<div class="page-header">
-	    <h1>Item call ${model.item.name}<small> Was succesfully deleted.</small></h1>
+<div class="jumbotron">
+	<div class="container">
+		<h1>Add Items</h1>
+		<p>
+		<p>
+			<a class="btn btn-primary btn-lg" href="admin" role="button">Go to admin</a>
+		</p>
 	</div>
-
-	<footer>
-		<p>&copy; Storage Items</p>
-	</footer>
 </div>
+
 
 </html>

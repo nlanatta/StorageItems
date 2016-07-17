@@ -5,23 +5,16 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<spring:url value="/resources/core/css/bootstrap.min.css"
-	var="bootstrapCss" />
+<spring:url value="/resources/core/css/bootstrap.min.css" var="bootstrapCss" />
 <link href="${bootstrapCss}" rel="stylesheet" />
 <spring:url value="/resources/core/js/bootstrap.min.js" var="bootstrapJs" />
 <spring:url value="/resources/core/js/app.js" var="appJs" />
 <script src="${bootstrapJs}"></script>
 <script src="${appJs}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<title>Insert title here</title>
+<title>Admin</title>
 </head>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Storage Items</a>
-		</div>
-	</div>
-</nav>
+<jsp:include page="header.jsp" />
 
 <div class="jumbotron">
 	<div class="container">
@@ -40,7 +33,7 @@
 <div id="form" class="container" ${aditionalStylesValues}>
 	<spring:url value="/items" var="itemsActionUrl" />
 
-	<form:form action="${itemsActionUrl}" method="post" modelAttribute="admin">
+	<form:form action="${itemsActionUrl}" method="post" modelAttribute="admin" enctype="multipart/form-data">
 			<div class="form-group">
 				<label>Name</label> 
 				<form:input path="name" type="text" class="form-control" id="name" placeholder="Name" />
