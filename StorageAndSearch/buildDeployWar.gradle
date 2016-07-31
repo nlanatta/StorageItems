@@ -1,0 +1,29 @@
+apply from: 'build.gradle'
+
+task deployToTomcat(type: Copy, dependsOn: 'war') {
+	copy{
+		from war.archivePath
+		into tomcat_webapps
+		include '*.war'
+	}
+}
+
+task deployWebContent(type: Copy, dependsOn: 'war') {
+	copy{
+		from projects_webapps
+		into projects_webcontent
+		include '**/*'
+	}
+	
+	copy{
+		from projects_classes
+		into projects_classes_webcontent
+		include '**/*'
+	}
+	
+	copy{
+		from projects_classes
+		into projects_classes_webcontent
+		include '**/*'
+	}
+}

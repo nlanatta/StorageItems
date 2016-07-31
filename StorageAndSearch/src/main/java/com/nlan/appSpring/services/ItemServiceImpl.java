@@ -31,7 +31,7 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public void saveOrUpdate(Item item) {
 
-		if (findById(item.getId())==null) {
+		if (item.isNew() || findById(item.getId()) == null) {
 			itemDao.save(item);
 		} else {
 			itemDao.update(item);

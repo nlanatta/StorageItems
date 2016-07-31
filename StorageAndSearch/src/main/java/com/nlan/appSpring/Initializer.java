@@ -16,7 +16,8 @@ public class Initializer implements WebApplicationInitializer {
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		// Create ApplicationContext. I'm using the
-	    // AnnotationConfigWebApplicationContext to avoid using beans xml files.
+	                       
+		// AnnotationConfigWebApplicationContext to avoid using beans xml files.
 	    AnnotationConfigWebApplicationContext ctx =
 	        new AnnotationConfigWebApplicationContext();
 	    ctx.register(WebappConfig.class);

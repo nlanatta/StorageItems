@@ -1,5 +1,4 @@
-CREATE DATABASE IF NOT EXISTS `db_items_storage`;
-USE `db_items_storage`;
+
 
 DROP TABLE IF EXISTS `stock`;
 
