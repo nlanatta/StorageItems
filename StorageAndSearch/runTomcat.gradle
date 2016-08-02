@@ -1,0 +1,9 @@
+apply from: 'build.gradle'
+apply plugin: 'java'
+
+ task start(type: Exec) {
+   doFirst {
+        println "Starting Tomcat server..."
+        commandLine = ['cmd', '/C', 'start', tomcat_start]
+    }
+ }

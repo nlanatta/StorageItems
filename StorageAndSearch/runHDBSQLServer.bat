@@ -1,0 +1,1 @@
+call gradle -b createDB.gradle runApp --info
