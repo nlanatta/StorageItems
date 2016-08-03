@@ -3,7 +3,7 @@ apply from: 'build.gradle'
 task deployToTomcat(type: Copy, dependsOn: 'war') {
 	copy{
 		from war.archivePath
-		into tomcat_webapps
+		into System.env.CATALINA_HOME+'/'+tomcat_webapps
 		include '*.war'
 	}
 }
