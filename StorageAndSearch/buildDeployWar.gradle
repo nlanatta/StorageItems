@@ -3,27 +3,36 @@ apply from: 'build.gradle'
 task deployToTomcat(type: Copy, dependsOn: 'war') {
 	copy{
 		from war.archivePath
-		into System.env.CATALINA_HOME+'/'+tomcat_webapps
+		into tomcat_webapps
 		include '*.war'
 	}
 }
 
-task deployWebContent(type: Copy, dependsOn: 'war') {
-	copy{
-		from projects_webapps
-		into projects_webcontent
-		include '**/*'
-	}
-	
-	copy{
-		from projects_classes
-		into projects_classes_webcontent
-		include '**/*'
-	}
-	
-	copy{
-		from projects_classes
-		into projects_classes_webcontent
-		include '**/*'
-	}
+task explodedWar(type: Copy, dependsOn: 'war') {
+copy{
+	 into tomcat_webapps+"/${war.baseName}"
+	 with war
+	 }
 }
+
+
+
+//task deployWebContent(type: Copy, dependsOn: 'war') {
+//	copy{
+//		from projects_webapps
+//		into projects_webcontent
+//		include '**/*'
+//	}
+	
+//	copy{
+//		from projects_classes
+//		into projects_classes_webcontent
+//		include '**/*'
+//	}
+	
+//	copy{
+//		from projects_classes
+//		into projects_classes_webcontent
+//		include '**/*'
+//	}
+//}
