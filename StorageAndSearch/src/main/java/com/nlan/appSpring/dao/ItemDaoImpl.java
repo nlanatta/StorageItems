@@ -1,6 +1,7 @@
 package com.nlan.appSpring.dao;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
@@ -19,7 +20,7 @@ public class ItemDaoImpl implements ItemDao {
 	@Override
 	public Item findById(Integer id) { //Item is the Entity instead of stock (table name)
 		List<?> list = hibernateTemplate.find("from Item where STOCK_ID="+id+"");
-		return (Item)list.get(0);
+		return Objects.nonNull(list) && list.size() > 0 ? (Item)list.get(0) : null;
 	}
 
 	@Override

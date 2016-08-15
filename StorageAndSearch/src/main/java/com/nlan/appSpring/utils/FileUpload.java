@@ -6,7 +6,7 @@ import java.io.IOException;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileUpload {
-	public static final String ROOT_IMAGES = "../../resources/core/images";
+	public static String ROOT_IMAGES = "../../resources/core/images";
 
 	public static boolean proccesFile(MultipartFile file) throws IOException {
 		boolean toReturn = false;
