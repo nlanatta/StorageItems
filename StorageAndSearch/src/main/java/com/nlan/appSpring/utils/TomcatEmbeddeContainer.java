@@ -1,25 +1,27 @@
 package com.nlan.appSpring.utils;
 
 import java.io.File;
+import java.util.Objects;
 
 import javax.servlet.ServletException;
 
 import org.apache.catalina.Host;
 import org.apache.catalina.LifecycleException;
-import org.apache.catalina.WebResourceRoot;
-import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.startup.Tomcat;
-import org.apache.catalina.webresources.DirResourceSet;
-import org.apache.catalina.webresources.StandardRoot;
 
 public class TomcatEmbeddeContainer {
 
+	private static Tomcat tomcat;
+
 	public static void main(String[] args) throws LifecycleException, ServletException {
-		Tomcat tomcat = new Tomcat();
+		startTomcat();
+	}
+
+	private static void startTomcat() throws ServletException, LifecycleException {
+		tomcat = new Tomcat();
 		tomcat.setPort(8080);
-		
-		//tomcat.setBaseDir(".");		
-		String root = ".";
+			
+		String root = "./WebContent";
 		 
         String contextPath = "/StorageAndSearch/"; 
  
@@ -36,9 +38,14 @@ public class TomcatEmbeddeContainer {
         
         tomcat.addWebapp(contextPath,  rootF.getAbsolutePath());		
 
-        
 		tomcat.start();
 		tomcat.getServer().await();
 	}
-
+	
+	public static void shutDownTomcat() throws LifecycleException{
+		if(Objects.nonNull(tomcat))
+		{
+			tomcat.stop();
+		}
+	}
 }

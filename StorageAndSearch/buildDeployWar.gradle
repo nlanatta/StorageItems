@@ -10,7 +10,7 @@ task deployToTomcat(type: Copy, dependsOn: 'war') {
 
 task explodedWar(type: Copy, dependsOn: 'war') {
 copy{
-	 into tomcat_webapps+"/${war.baseName}"
+	 into tomcat_webapps
 	 with war
 	 }
 }

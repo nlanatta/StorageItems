@@ -1,7 +1,9 @@
 /.gradle/
 /build/
 /bin/
+/WebContent/
 **/.gradle/
 **/.settings/
 **/build/
 **/bin/
+**/WebContent/
