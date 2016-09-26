@@ -31,5 +31,5 @@ public class Initializer implements WebApplicationInitializer {
 	    servlet.setLoadOnStartup(1);
 	    //this is to manage multipart images
 	    servlet.setMultipartConfig(ctx.getBean("multipartConfigElement", MultipartConfigElement.class));
-	}
+	}	
 }

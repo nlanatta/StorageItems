@@ -1,15 +1,23 @@
 package com.nlan.appSpring.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "stock")
 public class Item {
+
 	// form:hidden - hidden value
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +32,20 @@ public class Item {
 	
 	@Column(name="STOCK_IMAGE")
 	String image;
+		
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "stock_category", joinColumns = 
+			{@JoinColumn(name = "STOCK_ID", nullable = false, updatable = false)},
+			inverseJoinColumns ={@JoinColumn(name = "CATEGORY_ID", nullable = false, updatable = false)})
+	Set<Category> categories = new HashSet<Category>();
+	
+	public Set<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
 
 	public Item()
 	{
