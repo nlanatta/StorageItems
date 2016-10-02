@@ -38,7 +38,7 @@ public class IndexController {
 	private void setCategories(CategoryServiceImp catService) {
 		List<String> cats = CategoryUtils.getAll();
 		
-		for (int i = 0; i < /*cats.size()*/1; i++) {
+		for (int i = 0; i < cats.size(); i++) {
 			Category cat = new Category();
 			cat.setName(cats.get(i));
 			
