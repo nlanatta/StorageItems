@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.nlan.appSpring.config.DataBaseConfig;
+import com.nlan.appSpring.model.Category;
 import com.nlan.appSpring.model.Item;
 
 @Component
@@ -41,6 +42,7 @@ public class ConnectionDBService {
 		builder.scanPackages("com.nlan.appSpring.config");
 		builder.addProperties(getHibernateProperties());
 		builder.addAnnotatedClass(Item.class);
+		builder.addAnnotatedClass(Category.class);
 		return builder.buildSessionFactory();
 	}
 

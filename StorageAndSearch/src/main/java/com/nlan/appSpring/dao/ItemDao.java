@@ -5,7 +5,9 @@ import java.util.List;
 import com.nlan.appSpring.model.Item;
 
 public interface ItemDao {
-	Item findById(Integer id);
+	Item findById(int id);
+	
+	Item findByCategoryId(int id);
 
 	List<Item> findAll();
 
@@ -13,5 +15,5 @@ public interface ItemDao {
 
 	void update(Item user);
 
-	void delete(Integer id);
+	void delete(int id);
 }

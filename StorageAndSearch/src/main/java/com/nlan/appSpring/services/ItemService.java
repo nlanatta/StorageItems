@@ -11,5 +11,5 @@ public interface ItemService {
 
 	void saveOrUpdate(Item item);
 	
-	void delete(int id);
+	void delete(Integer id);
 }
