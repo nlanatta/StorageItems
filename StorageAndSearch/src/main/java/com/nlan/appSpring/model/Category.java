@@ -19,7 +19,7 @@ public class Category {
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		@Column(name = "CATEGORY_ID")
-		Integer id = 0;		
+		Integer id;
 
 		@Column(name="CATEGORY_NAME")
 		String name;
@@ -30,7 +30,7 @@ public class Category {
 		@Column(name="CATEGORY_IMAGE")
 		String image;
 		
-		@ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
+		@ManyToMany(mappedBy = "categories")
 		private Set<Item> items;
 
 		public Category()

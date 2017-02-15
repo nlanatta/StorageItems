@@ -24,10 +24,10 @@ public class Item {
 	@Column(name = "ITEM_ID")
 	Integer id;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "ITEM_CATEGORY", joinColumns = {
-			@JoinColumn(name = "ITEM_ID", nullable = false, updatable = false) },
-			inverseJoinColumns = { @JoinColumn(name = "CATEGORY_ID",
+			@JoinColumn(name = "CATEGORY_ID", nullable = false, updatable = false) },
+			inverseJoinColumns = { @JoinColumn(name = "ITEM_ID",
 					nullable = false, updatable = false) })
 	Set<Category> categories;
 
