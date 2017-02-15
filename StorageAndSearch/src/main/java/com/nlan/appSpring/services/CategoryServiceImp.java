@@ -30,7 +30,7 @@ public class CategoryServiceImp implements CategoryService {
 
 	@Override
 	public void saveOrUpdate(Category category) {
-		if (category.isNew() || findById(category.getCategoryId()) == null) {
+		if (category.isNew() || findById(category.getId()) == null) {
 			catDao.save(category);
 		} else {
 			catDao.update(category);

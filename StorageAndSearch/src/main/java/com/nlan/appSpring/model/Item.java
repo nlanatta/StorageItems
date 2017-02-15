@@ -1,5 +1,6 @@
 package com.nlan.appSpring.model;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -40,21 +41,7 @@ public class Item {
 	
 	@Column(name="ITEM_IMAGE")
 	String image;
-		
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "stock_category", joinColumns = 
-			{@JoinColumn(name = "STOCK_ID", nullable = false, updatable = false)},
-			inverseJoinColumns ={@JoinColumn(name = "CATEGORY_ID", nullable = false, updatable = false)})
-	Set<Category> categories = new HashSet<Category>();
 	
-	public Set<Category> getCategories() {
-		return categories;
-	}
-
-	public void setCategories(Set<Category> categories) {
-		this.categories = categories;
-	}
-
 	public Item()
 	{
 	}

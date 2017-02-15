@@ -19,7 +19,7 @@ public class CategoryDaoImp implements CategoryDao {
 	
 	@Override
 	public Category findById(Integer id) {
-		List<?> list = hibernateTemplate.find("from Category where CATEGORY_ID="+id+"");
+		List<?> list = hibernateTemplate.find("from CATEGORY where CATEGORY_ID="+id+"");
 		return Objects.nonNull(list) && list.size() > 0 ? (Category)list.get(0) : null;
 	}
 

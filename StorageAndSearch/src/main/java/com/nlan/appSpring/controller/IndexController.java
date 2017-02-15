@@ -46,7 +46,7 @@ public class IndexController {
 			
 			catService.saveOrUpdate(cat);
 			
-			Category catTemp = catService.findById(cat.getCategoryId());
+			Category catTemp = catService.findById(cat.getId());
 			
 			System.out.println(":::::::::::::::::::::::::::CATEGORY: POST SAVED "+catTemp.getName());
 		}
