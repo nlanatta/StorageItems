@@ -1,11 +1,12 @@
 package com.nlan.appSpring.model;
 
-import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,22 +16,29 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "stock")
+@Table(name = "ITEM")
 public class Item {
 
 	// form:hidden - hidden value
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "STOCK_ID")
+	@Column(name = "ITEM_ID")
 	Integer id;
 	
-	@Column(name="STOCK_NAME")
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "ITEM_CATEGORY", joinColumns = {
+			@JoinColumn(name = "CATEGORY_ID", nullable = false, updatable = false) },
+			inverseJoinColumns = { @JoinColumn(name = "ITEM_ID",
+					nullable = false, updatable = false) })
+	Set<Category> categories;
+
+	@Column(name="ITEM_NAME")
 	String name;
 
-	@Column(name="STOCK_DESCRIPTION")
+	@Column(name="ITEM_DESCRIPTION")
 	String description;
 	
-	@Column(name="STOCK_IMAGE")
+	@Column(name="ITEM_IMAGE")
 	String image;
 		
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -49,7 +57,6 @@ public class Item {
 
 	public Item()
 	{
-		
 	}
 	
 	public Item(String name, String description, String image) {
@@ -86,13 +93,25 @@ public class Item {
 		return image;
 	}
 
+	public Set<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+
 	public void setImage(String image) {
 		this.image = image;
 	}
 
 	// Check if this is for New of Update
 	public boolean isNew() {
-		return (this.id == null);
+		return Objects.isNull(this.id);
 	}
 
+	public String toString() {
+		return "Item [id=" + id + ", categories=" + categories.toString() + ", name=" + name + ", description=" + description
+				+ ", image=" + image + "]";
+}
 }

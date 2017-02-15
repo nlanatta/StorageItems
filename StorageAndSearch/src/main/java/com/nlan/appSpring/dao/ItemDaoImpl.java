@@ -18,8 +18,14 @@ public class ItemDaoImpl implements ItemDao {
 	private HibernateTemplate hibernateTemplate;
 	
 	@Override
-	public Item findById(Integer id) { //Item is the Entity instead of stock (table name)
-		List<?> list = hibernateTemplate.find("from Item where STOCK_ID="+id+"");
+	public Item findById(int id) { //Item is the Entity instead of stock (table name)
+		List<?> list = hibernateTemplate.find("from ITEM where ITEM_ID="+id+"");
+		return Objects.nonNull(list) && list.size() > 0 ? (Item)list.get(0) : null;
+	}
+	
+	@Override
+	public Item findByCategoryId(int id) { //Item is the Entity instead of stock (table name)
+		List<?> list = hibernateTemplate.find("from ITEM where CATEGORY_ID="+id+"");
 		return Objects.nonNull(list) && list.size() > 0 ? (Item)list.get(0) : null;
 	}
 
@@ -40,7 +46,7 @@ public class ItemDaoImpl implements ItemDao {
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void delete(int id) {
 		Item item = findById(id);
 		hibernateTemplate.delete(item );
 	}

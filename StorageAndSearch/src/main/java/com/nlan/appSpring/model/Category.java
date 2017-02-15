@@ -1,11 +1,11 @@
 package com.nlan.appSpring.model;
 
-import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,46 +13,84 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "category")
+@Table(name = "CATEGORY")
 public class Category {
+	// form:hidden - hidden value
+		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
+		@Column(name = "CATEGORY_ID")
+		Integer id;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "CATEGORY_ID")
-	Integer categoryId;
+		@Column(name="CATEGORY_NAME")
+		String name;
+		
+		@Column(name="CATEGORY_DESCRIPTION")
+		String description;
+		
+		@Column(name="CATEGORY_IMAGE")
+		String image;
+		
+		@ManyToMany(mappedBy = "categories")
+		private Set<Item> items;
 
-	public Integer getCategoryId() {
-		return categoryId;
-	}
+		public Category()
+		{		
+		}
+		
+		public Category(String name, String description, String image) {
+			this.name = name;
+			this.description = description;
+			this.image = image;
+		}
+		
+		public Set<Item> getItems() {
+			return items;
+		}
 
-	public void setCategoryId(Integer categoryId) {
-		this.categoryId = categoryId;
-	}
+		public void setItems(Set<Item> items) {
+			this.items = items;
+		}
 
-	public String getName() {
-		return name;
-	}
+		@Override
+		public String toString() {
+			return "Category [id=" + id + ", name=" + name + ", description=" + description + ", image=" + image
+					+ ", items=" + ""/*items*/ + "]";
+		}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+		public Integer getId() {
+			return id;
+		}
 
-	 public Set<Item> getStocks() {
-	 return stocks;
-	 }
-	
-	 public void setStocks(Set<Item> stocks) {
-	 this.stocks = stocks;
-	 }
+		public void setId(Integer id) {
+			this.id = id;
+		}
 
-	@Column(name = "CATEGORY_NAME")
-	String name;
+		public String getName() {
+			return name;
+		}
 
-	 @ManyToMany(cascade = CascadeType.ALL, mappedBy = "categories")
-	 private Set<Item> stocks = new HashSet<Item>();
+		public void setName(String name) {
+			this.name = name;
+		}
 
-	// Check if this is for New of Update
-	public boolean isNew() {
-		return (this.categoryId == null);
-	}
+		public String getDescription() {
+			return description;
+		}
+
+		public void setDescription(String description) {
+			this.description = description;
+		}
+
+		public String getImage() {
+			return image;
+		}
+
+		public void setImage(String image) {
+			this.image = image;
+		}
+		
+		// Check if this is for New of Update
+		public boolean isNew() {
+			return Objects.isNull(this.id);
+		}
 }
