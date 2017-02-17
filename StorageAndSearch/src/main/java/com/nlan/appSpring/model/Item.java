@@ -1,13 +1,11 @@
 package com.nlan.appSpring.model;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +17,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ITEM")
 public class Item {
-
 	// form:hidden - hidden value
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,9 +38,9 @@ public class Item {
 	
 	@Column(name="ITEM_IMAGE")
 	String image;
-	
+
 	public Item()
-	{
+	{		
 	}
 	
 	public Item(String name, String description, String image) {
@@ -100,5 +97,5 @@ public class Item {
 	public String toString() {
 		return "Item [id=" + id + ", categories=" + categories.toString() + ", name=" + name + ", description=" + description
 				+ ", image=" + image + "]";
-}
+	}
 }

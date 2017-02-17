@@ -69,7 +69,7 @@ public class ServerHDBSQL {
 			e.printStackTrace();
 		}
 	}
-
+	
 	private static void createTable(String table, String query, Statement statement) throws SQLException
 	{
 		statement.executeUpdate("DROP TABLE IF EXISTS "+table+ "CASCADE");
