@@ -6,7 +6,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,9 +25,8 @@ public class Item {
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "ITEM_CATEGORY", joinColumns = {
-			@JoinColumn(name = "CATEGORY_ID", nullable = false, updatable = false) },
-			inverseJoinColumns = { @JoinColumn(name = "ITEM_ID",
-					nullable = false, updatable = false) })
+			@JoinColumn(name = "ITEM_ID") },
+			inverseJoinColumns = { @JoinColumn(name = "CATEGORY_ID") })
 	Set<Category> categories;
 
 	@Column(name="ITEM_NAME")

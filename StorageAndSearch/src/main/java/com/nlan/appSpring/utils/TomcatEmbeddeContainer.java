@@ -20,7 +20,7 @@ public class TomcatEmbeddeContainer {
 	private static void startTomcat() throws ServletException, LifecycleException {
 		tomcat = new Tomcat();
 		tomcat.setPort(8080);
-			
+		
 		String root = "./WebContent";
 		 
         String contextPath = "/StorageAndSearch/"; 

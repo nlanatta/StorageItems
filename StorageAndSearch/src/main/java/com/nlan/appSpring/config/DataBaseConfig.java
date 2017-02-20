@@ -11,7 +11,7 @@ import org.springframework.context.annotation.PropertySource;
 public class DataBaseConfig {
 	@Value("${jdbc.driverClassName}")
 	private String driver;
-	
+
 	public String getDriver() {
 		return driver;
 	}
@@ -32,35 +32,48 @@ public class DataBaseConfig {
 
 	@Value("${jdbc.password}")
 	private String password;
-	
+
 	@Value("${hibernate.show_sql}")
 	private String showSql;
-	
-	@Value("${hibernate.hbm2ddl.auto}")	
+
+	@Value("${hibernate.format_sql}")
+	private String formatSql;
+
+	public String getFormatSql() {
+		return formatSql;
+	}
+
+	public void setFormatSql(String formatSql) {
+		this.formatSql = formatSql;
+	}
+
+	@Value("${hibernate.hbm2ddl.auto}")
 	private String hbm2dllAuto;
-	
+
 	@Value("${hibernate.generate_statistics}")
 	private String generateStatistics;
-	
+
 	@Value("${hibernate.dialect}")
 	private String dialect;
-	
+
 	@Value("${hibernate.current_session_context_class}")
-	private String currentSessionContextClass;	
+	private String currentSessionContextClass;
 
 	@Value("${hibernate.pool_size}")
 	private String poolSize;
-	
+
 	public String getCurrentSessionContextClass() {
 		return currentSessionContextClass;
 	}
+
 	public String getPoolSize() {
 		return poolSize;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
+
 	public String getDialect() {
 		return dialect;
 	}

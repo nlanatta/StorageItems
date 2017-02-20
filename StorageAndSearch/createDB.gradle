@@ -6,3 +6,9 @@ apply plugin: 'java'
 
    main = 'com.nlan.appSpring.utils.ServerHDBSQL'
  }
+ 
+ task runAppMySql(type: JavaExec) {
+   classpath = sourceSets.main.runtimeClasspath
+
+   main = 'com.nlan.appSpring.utils.ServerMysql'
+ }

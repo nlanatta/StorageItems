@@ -63,6 +63,7 @@ public class ConnectionDBService {
 		Properties properties = new Properties();
 		properties.put("hibernate.dialect", dbConfig.getDialect());
 		properties.put("hibernate.show_sql", dbConfig.getShowSql());
+		properties.put("hibernate.format_sql", dbConfig.getFormatSql());
 		properties.put("hibernate.hbm2ddl.auto", dbConfig.getHbm2dllAuto());
 		properties.put("hibernate.pool_size", dbConfig.getPoolSize());
 		properties.put("hibernate.generate_statistics", dbConfig.getGenerateStatistics());

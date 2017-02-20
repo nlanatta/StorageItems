@@ -5,9 +5,13 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nlan.appSpring.model.Category;
 
+@Repository("catDao")
+@Transactional
 public class CategoryDaoImp implements CategoryDao {
 
 	@Autowired
