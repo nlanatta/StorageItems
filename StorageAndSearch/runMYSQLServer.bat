@@ -1,0 +1,1 @@
+call gradle -b createDB.gradle runAppMySql --info
