@@ -3,7 +3,6 @@ package com.nlan.appSpring.utils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
@@ -22,24 +21,22 @@ public class ServerMysql {
 	}
 
 	public static void runAndCreateMYSQLDB() throws IOException {
-		String TMP_DIR = "/build/test/";
-		String dblocation = TMP_DIR + "db_items_storage";
 		Properties database = database();
 		MysqlDataSource dataSource = new MysqlDataSource();
 		dataSource.setDatabaseName("db_items_storage");
-		dataSource.setUrl(database.getProperty("jdbc.myurl"));
+		dataSource.setUrl(database.getProperty("jdbc.url")+"?createDatabaseIfNotExist=true");
 		dataSource.setUser(database.getProperty("jdbc.username"));
 		dataSource.setPassword(database.getProperty("jdbc.password"));
 
-		ResourceDatabasePopulator rdp = new ResourceDatabasePopulator();    
-		rdp.addScript(new ClassPathResource(
-		                        "querys/create_db_storage_table.sql"));
+//		ResourceDatabasePopulator rdp = new ResourceDatabasePopulator();    
+//		rdp.addScript(new ClassPathResource(
+//		                        "querys/create_db_storage_table.sql"));
 		
 		Connection connection = null;
 		Statement statement = null;
 
 		try {
-			Class.forName(database.getProperty("jdbc.mysqlDriverClassName")).newInstance();
+			Class.forName(database.getProperty("jdbc.driverClassName")).newInstance();
 		} catch (Exception e) {
 			System.err.println("ERROR: failed to load JDBC driver.");
 			e.printStackTrace();
@@ -48,7 +45,7 @@ public class ServerMysql {
 
 		try {
 			connection = dataSource.getConnection();
-			rdp.populate(connection);
+			//rdp.populate(connection);
 		} catch (SQLException e) {
 			System.out.println("SQLException: " + e.getMessage());
 		    System.out.println("SQLState: " + e.getSQLState());

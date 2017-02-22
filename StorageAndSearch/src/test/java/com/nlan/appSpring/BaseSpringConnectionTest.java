@@ -20,6 +20,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.nlan.appSpring.config.WebappConfig;
 import com.nlan.appSpring.utils.FileUpload;
 import com.nlan.appSpring.utils.ServerHDBSQL;
+import com.nlan.appSpring.utils.ServerMysql;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -27,6 +28,8 @@ import com.nlan.appSpring.utils.ServerHDBSQL;
 public class BaseSpringConnectionTest {
 
 	private static ServerHDBSQL serverServiceUtil;
+	
+	private static ServerMysql serverMysqlServiceUtil;
 	@Autowired
 	protected WebApplicationContext wac;
 
@@ -35,8 +38,10 @@ public class BaseSpringConnectionTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		FileUpload.ROOT_IMAGES = "../../../tempFileUpload";
-		serverServiceUtil = new ServerHDBSQL();
-		serverServiceUtil.runAndCreateDB();
+//		serverServiceUtil = new ServerHDBSQL();
+//		serverServiceUtil.runAndCreateDB();
+		serverMysqlServiceUtil = new ServerMysql();
+		serverMysqlServiceUtil.runAndCreateMYSQLDB();
 	}
 
 	@SuppressWarnings("static-access")
