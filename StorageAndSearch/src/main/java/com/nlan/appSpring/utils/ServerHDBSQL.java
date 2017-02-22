@@ -25,8 +25,11 @@ public class ServerHDBSQL {
 		String dblocation = TMP_DIR + "db_items_storage";
 		Properties database = database();
 		HsqlProperties p = new HsqlProperties();
+		
+		String username = database.getProperty("jdbc.username");
+		String password = database.getProperty("jdbc.password");
 
-		p.setProperty("server.database.0", "mem" + dblocation);
+		p.setProperty("server.database.0", "mem:" + dblocation + ";user="+username+";password="+password);
 		p.setProperty("server.dbname.0", "db_items_storage");
 		p.setProperty("server.port", 3336);
 		server = new Server();
@@ -54,14 +57,14 @@ public class ServerHDBSQL {
 			return;
 		}
 		try {
-			statement = connection.createStatement();
-			statement.executeUpdate("DROP SCHEMA PUBLIC CASCADE");
+//			statement = connection.createStatement();
+//			statement.executeUpdate("DROP SCHEMA PUBLIC CASCADE");
 			
-			createCategoryTable(statement);
-			createItemTable(statement);
-			createItemCategoryTable(statement);
+//			createCategoryTable(statement);
+//			createItemTable(statement);
+//			createItemCategoryTable(statement);
 			
-			statement.close();
+//   		statement.close();
 			connection.commit();
 			connection.close();
 		} catch (SQLException e) {
