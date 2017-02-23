@@ -13,51 +13,34 @@
 <spring:url value="/resources/core/js/app.js" var="appJs" />
 <script src="${bootstrapJs}"></script>
 <script src="${appJs}"></script>
-<title>Admin Panel Items</title>
+<title>Delete Category</title>
 </head>
-<jsp:include page="header.jsp" />
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Storage Categories</a>
+		</div>
+	</div>
+</nav>
 
 <div class="jumbotron">
 	<div class="container">
 		<h1>Check Storage Categories</h1>
 		<p>
 		<p>
-			<a class="btn btn-primary btn-lg" href="catList" role="button">Go to categories</a>
+			<a class="btn btn-primary btn-lg" href="catList" role="button">Go to Categories</a>
 		</p>
 	</div>
 </div>
 
-<div class="jumbotron">
-	<div class="container">
-		<h1>Add Categories</h1>
-		<p>
-		<p>
-			<a class="btn btn-primary btn-lg" href="adminCategory" role="button">Go to admin categories</a>
-		</p>
+<div id="result" class="container" >
+	<div class="page-header">
+	    <h1>Category call ${model.category.name}<small> Was succesfully deleted.</small></h1>
 	</div>
+
+	<footer>
+		<p>&copy; Storage Categories</p>
+	</footer>
 </div>
-
-
-<div class="jumbotron">
-	<div class="container">
-		<h1>Check Storage Items</h1>
-		<p>
-		<p>
-			<a class="btn btn-primary btn-lg" href="itemList" role="button">Go to items</a>
-		</p>
-	</div>
-</div>
-
-<div class="jumbotron">
-	<div class="container">
-		<h1>Add Items</h1>
-		<p>
-		<p>
-			<a class="btn btn-primary btn-lg" href="admin" role="button">Go to admin</a>
-		</p>
-	</div>
-</div>
-
-
 
 </html>

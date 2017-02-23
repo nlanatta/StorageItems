@@ -1,7 +1,9 @@
 apply from: 'build.gradle'
 
 task deployToTomcat(type: Copy, dependsOn: 'war') {
+	println 'ESTE ES EL WAR '+ war.archivePath
 	copy{
+		println 'ESTE ES EL WAR '+ war.archivePath
 		from war.archivePath
 		into tomcat_webapps
 		include '*.war'

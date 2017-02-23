@@ -1,7 +1,9 @@
 package com.nlan.appSpring.services;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import org.junit.After;
@@ -20,6 +22,10 @@ public class ItemServiceImplTest extends BaseSpringConnectionTest {
 
 	@Autowired
 	private ItemService itemService;
+	
+	@Autowired
+	private CategoryService catService;
+	
 	private Item item;
 
 	@Before
@@ -46,9 +52,6 @@ public class ItemServiceImplTest extends BaseSpringConnectionTest {
 
 		Assert.assertNotNull(itemService.findById(item.getId()));
 
-		List<Item> list = itemService.findAll();
-		Assert.assertTrue(list.size() == 1);
-
 		Category category1 = new Category("SPORT", "Close, Machines, Vehicles", "SPORT_IMAGE");
         Category category2 = new Category("INVESTMENT", "INVESTMENT COMPANY", "INVESTMENT OFFICE");
 
@@ -73,5 +76,51 @@ public class ItemServiceImplTest extends BaseSpringConnectionTest {
 		itemService.delete(item.getId());
 
 		Assert.assertNull(itemService.findById(item.getId()));
+	}
+	
+	@Test
+	public void testFillDefaultDatabase()
+	{
+		//Add categories
+		
+		for( int i = 0; i<10; ++i)
+		{
+			String name = "cat"+i;
+			String description = "Category";
+			String image = "/resources/core/images/cata.jpg";
+			Category cat = new Category(name, description, image);
+			
+			catService.saveOrUpdate(cat);
+		}
+		
+
+		
+		for( int i = 0; i<20; ++i)
+		{
+			String name = "item"+i;
+			String description = "Item";
+			String image = "/resources/core/images/cata.jpg";
+			Item item = new Item(name, description, image);
+			
+			
+			Random r2 = new Random();
+			int catsAmounByItem = r2.nextInt(4);
+			Set<Category> catsByItem = new HashSet<Category>();
+			List<Category> categories = catService.findAll();
+			Random r = new Random();
+			
+			for( int u = 0; u<catsAmounByItem; ++u)
+			{				
+				int catID = r.nextInt((categories.size() - 1));
+				Category cat = categories.get(catID);
+				catsByItem.add(cat);
+			}
+			
+			item.setCategories(catsByItem);
+			
+			itemService.saveOrUpdate(item);
+		}
+		
+		
 	}
 }

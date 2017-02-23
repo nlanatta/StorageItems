@@ -1,2 +1,1 @@
-exec gradle clean build
-exec gradle -b buildDeployWar.gradle
+exec gradle -b buildDeployWar.gradle -s

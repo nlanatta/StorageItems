@@ -38,10 +38,10 @@ public class BaseSpringConnectionTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		FileUpload.ROOT_IMAGES = "../../../tempFileUpload";
-		serverServiceUtil = new ServerHDBSQL();
-		serverServiceUtil.runAndCreateDB();
-//		serverMysqlServiceUtil = new ServerMysql();
-//		serverMysqlServiceUtil.runAndCreateMYSQLDB();
+//		serverServiceUtil = new ServerHDBSQL();
+//		serverServiceUtil.runAndCreateDB();
+		serverMysqlServiceUtil = new ServerMysql();
+		serverMysqlServiceUtil.runAndCreateMYSQLDB();
 	}
 
 	@SuppressWarnings("static-access")

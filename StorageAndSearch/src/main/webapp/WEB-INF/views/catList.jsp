@@ -14,13 +14,13 @@
 <spring:url value="/resources/core/js/app.js" var="appJs" />
 <script src="${bootstrapJs}"></script>
 <script src="${appJs}"></script>
-<title>Item List</title>
+<title>Category List</title>
 </head>
 <jsp:include page="header.jsp" />
 
 <div class="jumbotron">
 	<div class="container">
-		<h1>Check Storage Items</h1>
+		<h1>Check Storage Categories</h1>
 		<p>
 		<p>
 			<a class="btn btn-primary btn-lg" href="admin" role="button">Go
@@ -30,19 +30,19 @@
 </div>
 
 <div id="form" class="container">
-	<spring:url value="/resources/core/images/" var="itemsImageUrl" />
+	<spring:url value="/resources/core/images/" var="catsImageUrl" />
 
 	<div class="row">
-		<c:forEach items="${model.items}" var="item">
+		<c:forEach items="${model.categories}" var="category">
 			<div class="col-sm-6 col-md-4">
 				<div class="thumbnail">
-					<img class="img-responsive" width="242" height="200" src="${itemsImageUrl}${item.image}" alt="${item.name}">
+					<img class="img-responsive" width="242" height="200" src="${catsImageUrl}${category.image}" alt="${category.name}">
 					<div class="caption">
-						<h3>${item.name}</h3>
-						<p>${item.description}</p>
+						<h3>${category.name}</h3>
+						<p>${category.description}</p>
 						<p>
-							<a href="edit?id=${item.id}" class="btn btn-default" role="button">Edit</a> 
-							<a href="delete?id=${item.id}" class="btn btn-default" role="button">Delete</a>
+							<a href="editCategory?id=${category.id}" class="btn btn-default" role="button">Edit</a> 
+							<a href="deleteCategory?id=${category.id}" class="btn btn-default" role="button">Delete</a>
 						</p>
 					</div>
 				</div>
@@ -52,7 +52,7 @@
 
 	<hr>
 	<footer>
-		<p>&copy; Storage Items</p>
+		<p>&copy; Storage Categories</p>
 	</footer>
 </div>
 

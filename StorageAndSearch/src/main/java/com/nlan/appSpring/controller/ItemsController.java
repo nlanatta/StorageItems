@@ -22,7 +22,7 @@ import com.nlan.appSpring.utils.FileUpload;
 
 @Controller
 @ComponentScan("com.nlan.appSpring.controller")
-public class DataBaseController {
+public class ItemsController {
 
 	@Autowired
 	private ItemService itemService;
