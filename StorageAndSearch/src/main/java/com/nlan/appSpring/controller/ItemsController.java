@@ -1,7 +1,9 @@
 package com.nlan.appSpring.controller;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.nlan.appSpring.model.Category;
 import com.nlan.appSpring.model.Item;
+import com.nlan.appSpring.services.CategoryService;
 import com.nlan.appSpring.services.ItemService;
 import com.nlan.appSpring.utils.FileUpload;
 
@@ -26,12 +30,15 @@ public class ItemsController {
 
 	@Autowired
 	private ItemService itemService;
+	
+	@Autowired
+	private CategoryService catService;
 
 	@RequestMapping(value = "/items", method = RequestMethod.POST)
 	public ModelAndView addItemRequested(@ModelAttribute("admin") @Validated Item item, BindingResult result,
 			@RequestParam("image") MultipartFile file, @RequestParam("name") String name,
-			@RequestParam("description") String description, Model model) {
-
+			@RequestParam("description") String description, @RequestParam("categories") String categories, Model model) {		
+		
 		// Save image on resources/core/images
 		try {
 			Item itemToChange = itemService.findById(item.getId());
@@ -54,6 +61,17 @@ public class ItemsController {
 			{
 				item.setName(itemToChange.getName());
 			}
+			
+			String[] cats = categories.split(",");
+			Set<Category> categoriesList = new HashSet<Category>();
+			
+			for (String cat : cats) {
+				Category c = catService.findById(Integer.valueOf(cat));
+				categoriesList.add(c);
+			}
+			
+			if(!categoriesList.isEmpty())
+				item.setCategories(categoriesList);
 				
 		} catch (IOException e) {
 			e.printStackTrace();

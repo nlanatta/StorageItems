@@ -9,9 +9,19 @@
 <link href="${bootstrapCss}" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <spring:url value="/resources/core/js/bootstrap.min.js" var="bootstrapJs" />
+<spring:url value="/resources/core/js/bootstrap-multiselect.js" var="bootstrapMultiselectJS" />
+<script src="${bootstrapMultiselectJS}"></script>
+<spring:url value="/resources/core/css/bootstrap-multiselect.css" var="bootstrapMultiselectCss" />
+<link href="${bootstrapMultiselectCss}" rel="stylesheet" />
 <spring:url value="/resources/core/js/app.js" var="appJs" />
 <script src="${bootstrapJs}"></script>
 <script src="${appJs}"></script>
+<!-- Initialize the plugin: -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#multiselect').multiselect();
+    });
+</script>
 <title>Admin</title>
 </head>
 <jsp:include page="header.jsp" />
@@ -43,42 +53,15 @@
 				<form:textarea path="description" id="description" class="form-control"  rows="4" cols="50" placeholder="Set item description" />			
 			</div>
 			
-			
-			<div class="btn-group bootstrap-select show-tick">
-				<button type="button" class="btn dropdown-toggle btn-default bs-placeholder" data-toggle="dropdown" role="button" title="Nothing selected" aria-expanded="false">
-					<span class="filter-option pull-left">Nothing selected</span>&nbsp;
-					<span class="bs-caret">
-						<span class="caret"></span>
-					</span>
-				</button>
-				<div class="dropdown-menu open" role="combobox" style="max-height: 216px; overflow: hidden; min-height: 0px;">
-					<ul class="dropdown-menu inner" role="listbox" aria-expanded="false" style="max-height: 204px; overflow-y: auto; min-height: 0px;">
-						<li data-original-index="0" class="">
-							<a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
-								<span class="text">Mustard</span>
-								<span class="glyphicon glyphicon-ok check-mark"></span>
-							</a>
-						</li>
-						<li data-original-index="1">
-							<a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
-								<span class="text">Ketchup</span>
-								<span class="glyphicon glyphicon-ok check-mark"></span>
-							</a>
-						</li>
-						<li data-original-index="2" class="">
-							<a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
-								<span class="text">Relish</span>
-								<span class="glyphicon glyphicon-ok check-mark"></span>
-							</a>
-						</li>
-					</ul>
-				</div>
-				<select class="selectpicker" multiple="" tabindex="-98">
-				    <c:forEach items="${model.categories}" var="category">
-						  <option>{category.name}</option>
+			<div class="form-group">
+				<!-- Build your select: -->
+				<select name="categories" path="categories" id="multiselect" multiple="categories">
+					<c:forEach items="${model.categories}" var="category">
+					    <option value="${category.id}">${category.name}</option>
 					</c:forEach>
-				  </select>
+				</select>
 			</div>
+
 			<div class="form-group">
 				<label>Attach file</label> 
 				<form:input path="image" id="image" type="file" />
