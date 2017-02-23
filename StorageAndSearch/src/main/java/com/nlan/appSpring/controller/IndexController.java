@@ -12,14 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.nlan.appSpring.model.Category;
 import com.nlan.appSpring.model.Item;
 import com.nlan.appSpring.services.CategoryService;
-import com.nlan.appSpring.services.ItemService;
 
 @Controller
 @ComponentScan("com.nlan.appSpring.controller")
 public class IndexController {
-	
-	@Autowired
-	private ItemService itemService;
 	
 	@Autowired
 	private CategoryService categoryService;

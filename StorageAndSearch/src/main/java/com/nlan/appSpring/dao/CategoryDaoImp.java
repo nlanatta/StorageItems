@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Objects;
 
 import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
@@ -22,7 +21,6 @@ public class CategoryDaoImp implements CategoryDao {
 	
 	@Override
 	public Category findById(Integer id) {
-//		List<?> list = hibernateTemplate.find("from CATEGORY where CATEGORY_ID="+id+"");
 		DetachedCriteria criteria = DetachedCriteria.forClass(Category.class);
 		criteria.add(Restrictions.idEq(id));
 		List<?> list = hibernateTemplate.findByCriteria(criteria);

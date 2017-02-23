@@ -3,6 +3,8 @@ package com.nlan.appSpring.dao;
 import java.util.List;
 import java.util.Objects;
 
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
@@ -19,7 +21,9 @@ public class ItemDaoImpl implements ItemDao {
 	
 	@Override
 	public Item findById(Integer id) { //Item is the Entity instead of stock (table name)
-		List<?> list = hibernateTemplate.find("from Item where ITEM_ID="+id+"");
+		DetachedCriteria criteria = DetachedCriteria.forClass(Item.class);
+		criteria.add(Restrictions.idEq(id));
+		List<?> list = hibernateTemplate.findByCriteria(criteria);
 		return Objects.nonNull(list) && list.size() > 0 ? (Item)list.get(0) : null;
 	}
 	
