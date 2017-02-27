@@ -1,0 +1,1 @@
+exec gradle -b runApplication.gradle runApp --info
