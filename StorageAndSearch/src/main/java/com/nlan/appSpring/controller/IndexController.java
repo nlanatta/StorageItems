@@ -42,7 +42,7 @@ public class IndexController {
 	}
 	
 	@RequestMapping("/")
-	public String enterPoint(Model model) {
+	public String enterPoint( Model model) {
 		return "index";
 	}
 }

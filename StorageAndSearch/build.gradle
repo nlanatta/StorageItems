@@ -12,7 +12,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'war'
-//apply plugin: 'groovy'
 
 
 repositories {
@@ -35,7 +34,9 @@ dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.5.1.RELEASE'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.1.RELEASE'
 	compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '1.5.1.RELEASE'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '1.5.1.RELEASE'
 	compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '8.5.11'
+	
 	
 
     testCompile 'junit:junit:4.12'

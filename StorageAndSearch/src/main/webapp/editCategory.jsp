@@ -1,22 +1,11 @@
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<jsp:include page="tagsHeader.jsp" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<spring:url value="/resources/core/css/bootstrap.min.css"
-	var="bootstrapCss" />
-<link href="${bootstrapCss}" rel="stylesheet" />
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<spring:url value="/resources/core/js/bootstrap.min.js"
-	var="bootstrapJs" />
-<spring:url value="/resources/core/js/app.js" var="appJs" />
-<script src="${bootstrapJs}"></script>
-<script src="${appJs}"></script>
-<title>Edit Category</title>
-</head>
 <jsp:include page="header.jsp" />
+<title>Edit Cotegory</title>
+</head>
+<jsp:include page="navHeader.jsp" />
 
 <div class="jumbotron">
 	<div class="container">
