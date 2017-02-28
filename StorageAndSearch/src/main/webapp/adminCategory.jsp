@@ -1,11 +1,12 @@
-<jsp:include page="tagsHeader.jsp" />
+<%@include file="tagsHeader.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<jsp:include page="header.jsp" />
+<%@include file="header.jsp"%>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Admin Categories</title>
 </head>
-<jsp:include page="navHeader.jsp" />
+<%@include file="navHeader.jsp"%>
 
 <div class="jumbotron">
 	<div class="container">

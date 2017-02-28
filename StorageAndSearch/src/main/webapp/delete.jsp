@@ -1,11 +1,13 @@
-<jsp:include page="tagsHeader.jsp" />
+<%@include file="tagsHeader.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<jsp:include page="header.jsp" />
-<title>Delete Items</title>
+<%@include file="header.jsp"%>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delete Item</title>
 </head>
-<jsp:include page="navHeader.jsp" />
+<%@include file="navHeader.jsp"%>
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
