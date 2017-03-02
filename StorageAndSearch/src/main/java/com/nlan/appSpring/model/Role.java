@@ -4,12 +4,14 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "role")
+@Table(name = "ROLE")
 public class Role {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ROLE_ID")
     private Long id;
 	
+	@Column(name = "ROLE_NAME")
     private String name;
     
     @ManyToMany(mappedBy = "roles")

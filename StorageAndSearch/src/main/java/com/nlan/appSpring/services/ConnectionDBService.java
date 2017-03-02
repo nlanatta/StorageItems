@@ -3,6 +3,7 @@ package com.nlan.appSpring.services;
 import java.util.Properties;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
@@ -12,7 +13,11 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.nlan.appSpring.config.DataBaseConfig;
@@ -35,29 +40,53 @@ public class ConnectionDBService {
 		ds.setPassword(dbConfig.getPassword());
 		return ds;
 	}
-
-	@Bean(name = "sessionFactory")
-	public SessionFactory sessionFactory() {
-		LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());
-		builder.scanPackages("com.nlan.appSpring.config");
-		builder.addProperties(getHibernateProperties());
-		builder.addAnnotatedClass(Item.class);
-		builder.addAnnotatedClass(Category.class);
-		return builder.buildSessionFactory();
-	}
-
-	@Autowired
+	
 	@Bean
-	public HibernateTransactionManager txManager(SessionFactory sessionFactory) {
-		return new HibernateTransactionManager(sessionFactory);
-	}
+	  public EntityManagerFactory entityManagerFactory() {
 
-	@Autowired
-	@Bean
-	public HibernateTemplate getHibernateTemplate(SessionFactory sessionFactory) {
-		HibernateTemplate hibernateTemplate = new HibernateTemplate(sessionFactory);
-		return hibernateTemplate;
-	}
+	    HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+	    vendorAdapter.setGenerateDdl(true);
+
+	    LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+	    factory.setJpaVendorAdapter(vendorAdapter);
+	    factory.setPackagesToScan("com.nlan.appSpring");
+	    factory.setDataSource(dataSource());
+	    factory.setJpaProperties(getHibernateProperties());
+	    factory.afterPropertiesSet();
+
+	    return factory.getObject();
+	  }
+
+	  @Bean
+	  public PlatformTransactionManager transactionManager() {
+
+	    JpaTransactionManager txManager = new JpaTransactionManager();
+	    txManager.setEntityManagerFactory(entityManagerFactory());
+	    return txManager;
+	  }
+
+//	@Bean(name = "sessionFactory")
+//	public SessionFactory sessionFactory() {
+//		LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());
+//		builder.scanPackages("com.nlan.appSpring.config");
+//		builder.addProperties(getHibernateProperties());
+//		builder.addAnnotatedClass(Item.class);
+//		builder.addAnnotatedClass(Category.class);
+//		return builder.buildSessionFactory();
+//	}
+//
+//	@Autowired
+//	@Bean
+//	public HibernateTransactionManager txManager(SessionFactory sessionFactory) {
+//		return new HibernateTransactionManager(sessionFactory);
+//	}
+//
+//	@Autowired
+//	@Bean
+//	public HibernateTemplate getHibernateTemplate(SessionFactory sessionFactory) {
+//		HibernateTemplate hibernateTemplate = new HibernateTemplate(sessionFactory);
+//		return hibernateTemplate;
+//	}
 
 	private Properties getHibernateProperties() {
 		Properties properties = new Properties();

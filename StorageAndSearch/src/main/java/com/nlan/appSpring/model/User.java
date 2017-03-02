@@ -4,20 +4,25 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
+@Table(name = "USER")
 public class User {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "USER_ID")
     private Long id;
 	
+	@Column(name = "USER_NAME")
     private String username;
+	
+	@Column(name = "USER_PASSWORD")
     private String password;
     
     @Transient
     private String passwordConfirm;
     
     @ManyToMany
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), 
+    inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private Set<Role> roles;
 
     
