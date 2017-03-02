@@ -8,13 +8,13 @@ import java.util.Set;
 public class User {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "USER_ID")
+	//@Column(name = "USER_ID")
     private Long id;
 	
-	@Column(name = "USER_NAME")
+	//@Column(name = "USER_NAME")
     private String username;
 	
-	@Column(name = "USER_PASSWORD")
+	//@Column(name = "USER_PASSWORD")
     private String password;
     
     @Transient

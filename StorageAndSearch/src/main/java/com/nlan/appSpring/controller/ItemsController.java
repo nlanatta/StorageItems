@@ -78,7 +78,7 @@ public class ItemsController {
 		}
 		
 
-		itemService.saveOrUpdate(item);
+		itemService.save(item);
 
 		model.addAttribute("item", item);
 		model.addAttribute("result", true);

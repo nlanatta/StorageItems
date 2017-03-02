@@ -6,13 +6,9 @@ import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.HibernateTemplate;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -21,10 +17,9 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.nlan.appSpring.config.DataBaseConfig;
-import com.nlan.appSpring.model.Category;
-import com.nlan.appSpring.model.Item;
 
 @Component
+@EnableJpaRepositories("com.nlan.appSpring.repository")
 @EnableTransactionManagement
 public class ConnectionDBService {
 
@@ -40,6 +35,7 @@ public class ConnectionDBService {
 		ds.setPassword(dbConfig.getPassword());
 		return ds;
 	}
+	
 	
 	@Bean
 	  public EntityManagerFactory entityManagerFactory() {
@@ -93,7 +89,7 @@ public class ConnectionDBService {
 		properties.put("hibernate.dialect", dbConfig.getDialect());
 		properties.put("hibernate.show_sql", dbConfig.getShowSql());
 		properties.put("hibernate.format_sql", dbConfig.getFormatSql());
-		properties.put("hibernate.hbm2ddl.auto", dbConfig.getHbm2dllAuto());
+		//properties.put("hibernate.hbm2ddl.auto", dbConfig.getHbm2dllAuto());
 		properties.put("hibernate.pool_size", dbConfig.getPoolSize());
 		properties.put("hibernate.generate_statistics", dbConfig.getGenerateStatistics());
 		return properties;

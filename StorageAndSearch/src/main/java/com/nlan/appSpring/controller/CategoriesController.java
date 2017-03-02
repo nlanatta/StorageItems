@@ -60,7 +60,7 @@ public class CategoriesController {
 		}
 		
 
-		categoryService.saveOrUpdate(category);
+		categoryService.save(category);
 
 		model.addAttribute("category", category);
 		model.addAttribute("result", true);

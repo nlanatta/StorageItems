@@ -9,7 +9,9 @@ public interface ItemService {
 	
 	List<Item> findAll();
 
-	void saveOrUpdate(Item item);
+	void save(Item item);
+	
+	Item saveAndFlush(Item item);
 	
 	void delete(Integer id);
 }

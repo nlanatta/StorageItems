@@ -25,13 +25,18 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public void saveOrUpdate(Category category) {
+	public void save(Category category) {
 		categoryRepository.save(category);
 	}
 
 	@Override
 	public void delete(int id) {
 		categoryRepository.delete(id);
+	}
+
+	@Override
+	public Category saveAdFlush(Category category) {
+		return categoryRepository.saveAndFlush(category);
 	}
 
 }

@@ -25,12 +25,17 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public void saveOrUpdate(Item item) {
+	public void save(Item item) {
 		itemRepository.save(item);
 	}
 
 	@Override
 	public void delete(Integer id) {
 		itemRepository.delete(id);
+	}
+
+	@Override
+	public Item saveAndFlush(Item item) {
+		return itemRepository.saveAndFlush(item);
 	}
 }
