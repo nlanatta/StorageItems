@@ -24,9 +24,10 @@ public class ServerMysql {
 		Properties database = database();
 		MysqlDataSource dataSource = new MysqlDataSource();
 		dataSource.setDatabaseName("db_items_storage");
-		dataSource.setUrl(database.getProperty("jdbc.url")+"?createDatabaseIfNotExist=true");
+		dataSource.setUrl(database.getProperty("jdbc.url")+"?useSSL=false&createDatabaseIfNotExist=true");
 		dataSource.setUser(database.getProperty("jdbc.username"));
 		dataSource.setPassword(database.getProperty("jdbc.password"));
+		
 
 //		ResourceDatabasePopulator rdp = new ResourceDatabasePopulator();    
 //		rdp.addScript(new ClassPathResource(

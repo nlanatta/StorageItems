@@ -35,61 +35,36 @@ public class ConnectionDBService {
 		ds.setPassword(dbConfig.getPassword());
 		return ds;
 	}
-	
-	
+
 	@Bean
-	  public EntityManagerFactory entityManagerFactory() {
+	public EntityManagerFactory entityManagerFactory() {
 
-	    HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-	    vendorAdapter.setGenerateDdl(true);
+		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+//		vendorAdapter.setGenerateDdl(true);
 
-	    LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-	    factory.setJpaVendorAdapter(vendorAdapter);
-	    factory.setPackagesToScan("com.nlan.appSpring");
-	    factory.setDataSource(dataSource());
-	    factory.setJpaProperties(getHibernateProperties());
-	    factory.afterPropertiesSet();
+		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+		factory.setJpaVendorAdapter(vendorAdapter);
+		factory.setPackagesToScan("com.nlan.appSpring");
+		factory.setDataSource(dataSource());
+		factory.setJpaProperties(getHibernateProperties());
+		factory.afterPropertiesSet();
 
-	    return factory.getObject();
-	  }
+		return factory.getObject();
+	}
 
-	  @Bean
-	  public PlatformTransactionManager transactionManager() {
-
-	    JpaTransactionManager txManager = new JpaTransactionManager();
-	    txManager.setEntityManagerFactory(entityManagerFactory());
-	    return txManager;
-	  }
-
-//	@Bean(name = "sessionFactory")
-//	public SessionFactory sessionFactory() {
-//		LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());
-//		builder.scanPackages("com.nlan.appSpring.config");
-//		builder.addProperties(getHibernateProperties());
-//		builder.addAnnotatedClass(Item.class);
-//		builder.addAnnotatedClass(Category.class);
-//		return builder.buildSessionFactory();
-//	}
-//
-//	@Autowired
-//	@Bean
-//	public HibernateTransactionManager txManager(SessionFactory sessionFactory) {
-//		return new HibernateTransactionManager(sessionFactory);
-//	}
-//
-//	@Autowired
-//	@Bean
-//	public HibernateTemplate getHibernateTemplate(SessionFactory sessionFactory) {
-//		HibernateTemplate hibernateTemplate = new HibernateTemplate(sessionFactory);
-//		return hibernateTemplate;
-//	}
+	@Bean
+	public PlatformTransactionManager transactionManager() {
+		JpaTransactionManager txManager = new JpaTransactionManager();
+		txManager.setEntityManagerFactory(entityManagerFactory());
+		return txManager;
+	}
 
 	private Properties getHibernateProperties() {
 		Properties properties = new Properties();
 		properties.put("hibernate.dialect", dbConfig.getDialect());
 		properties.put("hibernate.show_sql", dbConfig.getShowSql());
 		properties.put("hibernate.format_sql", dbConfig.getFormatSql());
-		//properties.put("hibernate.hbm2ddl.auto", dbConfig.getHbm2dllAuto());
+		properties.put("hibernate.hbm2ddl.auto", dbConfig.getHbm2dllAuto());
 		properties.put("hibernate.pool_size", dbConfig.getPoolSize());
 		properties.put("hibernate.generate_statistics", dbConfig.getGenerateStatistics());
 		return properties;

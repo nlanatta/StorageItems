@@ -23,7 +23,7 @@ public class IndexControllerTest extends BaseSpringConnectionTest {
 		mockMvc.perform(get("/"))
         .andExpect(status().isOk())
         .andExpect(view().name("index"))
-        .andExpect(forwardedUrl("/WEB-INF/views/index.jsp"));
+        .andExpect(forwardedUrl("/index.jsp"));
 	}
 	
 	@Test
@@ -34,7 +34,7 @@ public class IndexControllerTest extends BaseSpringConnectionTest {
 		mockMvc.perform(get("/admin"))
         .andExpect(status().isOk())
         .andExpect(view().name("admin"))
-        .andExpect(forwardedUrl("/WEB-INF/views/admin.jsp"))
+        .andExpect(forwardedUrl("/admin.jsp"))
         .andExpect(model().attribute("admin", CoreMatchers.instanceOf(Item.class)))
 		.andExpect(model().attribute("admin", CoreMatchers.notNullValue()));
 	}

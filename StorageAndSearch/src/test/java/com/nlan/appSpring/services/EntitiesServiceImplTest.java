@@ -1,12 +1,6 @@
 package com.nlan.appSpring.services;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -14,7 +8,6 @@ import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nlan.appSpring.BaseSpringConnectionTest;
-import com.nlan.appSpring.model.Category;
 import com.nlan.appSpring.model.Item;
 import com.nlan.appSpring.model.User;
 
@@ -36,33 +29,33 @@ public class EntitiesServiceImplTest extends BaseSpringConnectionTest {
 
 	@Before
 	public void setUp() throws Exception {
-		String userName = "administrator";
-		String password = "123456789";
-		user = new User();
-		user.setUsername(userName);
-		user.setPassword(password);
-		//user.setPasswordConfirm(password);
-		userService.save(user);	
+//		String userName = "administrator";
+//		String password = "123456789";
+//		user = new User();
+//		user.setUsername(userName);
+//		user.setPassword(password);
+//		//user.setPasswordConfirm(password);
+//		userService.save(user);	
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		super.tearDown();
-		item = null;
+//		super.tearDown();
+//		item = null;
 	}
 
 	@Override
 	protected void mockData() {
-		super.mockData();
-		item = new Item("dog", "Big dog", "bigDog.jpg");
+//		super.mockData();
+//		item = new Item("dog", "Big dog", "bigDog.jpg");
 	}
 
 	@Test
 	public void testFirstaddUser()
 	{		
-		String username = user.getUsername();
-		User userToTest = userService.findById(user.getId());
-		userToTest = userService.findByUsername(username);
+//		String username = user.getUsername();
+//		User userToTest = userService.findById(user.getId());
+//		userToTest = userService.findByUsername(username);
 		//Assert.assertTrue(userToTest.equals(user));
 	}
 	
@@ -105,43 +98,43 @@ public class EntitiesServiceImplTest extends BaseSpringConnectionTest {
 	{
 		//Add categories
 		
-		for( int i = 0; i<10; ++i)
-		{
-			String name = "cat"+i;
-			String description = "Category";
-			String image = "/resources/core/images/cata.jpg";
-			Category cat = new Category(name, description, image);
-			
-			categoryService.save(cat);
-		}
-		
-
-		
-		for( int i = 0; i<20; ++i)
-		{
-			String name = "item"+i;
-			String description = "Item";
-			String image = "/resources/core/images/cata.jpg";
-			Item item = new Item(name, description, image);
-			
-			
-			Random r2 = new Random();
-			int catsAmounByItem = r2.nextInt(4);
-			Set<Category> catsByItem = new HashSet<Category>();
-			List<Category> categories = categoryService.findAll();
-			Random r = new Random();
-			
-			for( int u = 0; u<catsAmounByItem; ++u)
-			{				
-				int catID = r.nextInt((categories.size() - 1));
-				Category cat = categories.get(catID);
-				catsByItem.add(cat);
-			}
-			
-			item.setCategories(catsByItem);
-			
-			itemService.save(item);
-		}
+//		for( int i = 0; i<10; ++i)
+//		{
+//			String name = "cat"+i;
+//			String description = "Category";
+//			String image = "/resources/core/images/cata.jpg";
+//			Category cat = new Category(name, description, image);
+//			
+//			categoryService.save(cat);
+//		}
+//		
+//
+//		
+//		for( int i = 0; i<20; ++i)
+//		{
+//			String name = "item"+i;
+//			String description = "Item";
+//			String image = "/resources/core/images/cata.jpg";
+//			Item item = new Item(name, description, image);
+//			
+//			
+//			Random r2 = new Random();
+//			int catsAmounByItem = r2.nextInt(4);
+//			Set<Category> catsByItem = new HashSet<Category>();
+//			List<Category> categories = categoryService.findAll();
+//			Random r = new Random();
+//			
+//			for( int u = 0; u<catsAmounByItem; ++u)
+//			{				
+//				int catID = r.nextInt((categories.size() - 1));
+//				Category cat = categories.get(catID);
+//				catsByItem.add(cat);
+//			}
+//			
+//			item.setCategories(catsByItem);
+//			
+//			itemService.save(item);
+//		}
 		
 		
 	}
