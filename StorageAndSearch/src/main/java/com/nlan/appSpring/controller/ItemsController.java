@@ -30,53 +30,53 @@ public class ItemsController {
 
 	@Autowired
 	private ItemService itemService;
-	
+
 	@Autowired
 	private CategoryService catService;
 
 	@RequestMapping(value = "/items", method = RequestMethod.POST)
 	public ModelAndView addItemRequested(@ModelAttribute("admin") @Validated Item item, BindingResult result,
 			@RequestParam("image") MultipartFile file, @RequestParam("name") String name,
-			@RequestParam("description") String description, @RequestParam("categories") String categories, Model model) {		
-		
-		// Save image on resources/core/images
-		try {
-			Item itemToChange = itemService.findById(item.getId());
-			if (!FileUpload.proccesFile(file)) {
-				if (itemToChange != null) {
-					item.setImage(itemToChange.getImage());
+			@RequestParam("description") String description, @RequestParam("categories") String categories,
+			Model model) {
+
+		if (item.getId() != null) {
+			// Save image on resources/core/images
+			try {
+				Item itemToChange = itemService.findById(item.getId());
+				if (!FileUpload.proccesFile(file)) {
+					if (itemToChange != null) {
+						item.setImage(itemToChange.getImage());
+					}
 				}
+
+				if (item.getImage() == null) {
+					item.setImage(file.getOriginalFilename());
+				}
+
+				if (item.getDescription().equals("")) {
+					item.setDescription(itemToChange.getDescription());
+				}
+
+				if (item.getName().equals("")) {
+					item.setName(itemToChange.getName());
+				}
+
+				String[] cats = categories.split(",");
+				Set<Category> categoriesList = new HashSet<Category>();
+
+				for (String cat : cats) {
+					Category c = catService.findById(Integer.valueOf(cat));
+					categoriesList.add(c);
+				}
+
+				if (!categoriesList.isEmpty())
+					item.setCategories(categoriesList);
+
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-			
-			if (item.getImage() == null) {
-				item.setImage(file.getOriginalFilename());
-			}
-			
-			if(item.getDescription().equals(""))
-			{
-				item.setDescription(itemToChange.getDescription());
-			}
-			
-			if(item.getName().equals(""))
-			{
-				item.setName(itemToChange.getName());
-			}
-			
-			String[] cats = categories.split(",");
-			Set<Category> categoriesList = new HashSet<Category>();
-			
-			for (String cat : cats) {
-				Category c = catService.findById(Integer.valueOf(cat));
-				categoriesList.add(c);
-			}
-			
-			if(!categoriesList.isEmpty())
-				item.setCategories(categoriesList);
-				
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
-		
 
 		itemService.save(item);
 

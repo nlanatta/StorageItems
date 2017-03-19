@@ -3,12 +3,16 @@ package com.nlan.appSpring.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,6 +31,11 @@ public class CategoriesController {
 	@Autowired
 	private CategoryService categoryService;
 
+	@ExceptionHandler({IllegalArgumentException.class, NullPointerException.class})
+	void handleBadRequests(HttpServletResponse response) throws IOException {
+	    response.sendError(HttpStatus.BAD_REQUEST.value());
+	}
+	
 	@RequestMapping(value = "/categories", method = RequestMethod.POST)
 	public ModelAndView addCategoryRequested(@ModelAttribute("adminCategory") @Validated Category category, BindingResult result,
 			@RequestParam("image") MultipartFile file, @RequestParam("name") String name,
